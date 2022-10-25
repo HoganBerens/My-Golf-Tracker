@@ -1,0 +1,33 @@
+.home-container {
+  background-color: rgb(187, 232, 247);
+  width: 100vw;
+  height: 100vh;
+}
+.home-score-wrapper {
+  display: flex;
+  height: 100%;
+}
+
+.home-new-scores {
+  flex: 1 1 auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 40px;
+}
+
+.home-view-scores {
+  flex: 1 1 auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 40px;
+}
+
+.home-view-scores:hover {
+  background-color: coral;
+}
+
+.home-new-scores:hover {
+  background-color: coral;
+}
