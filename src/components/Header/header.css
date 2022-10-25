@@ -1,18 +1,16 @@
 .header-container {
-  width: 100vw;
-  height: 5vh;
   background-color: rgb(58, 77, 101);
   display: flex;
-  justify-content: center;
-  flex-direction: column;
+  justify-content: space-between;
+  padding: 24px;
+  align-items: center;
 }
 
 .header-title {
-  display: flex;
-  justify-content: center;
+  color: white;
 }
 
 .header-profileLink {
-  display: flex;
-  justify-content: right;
+  color: white;
+  text-decoration: none;
 }
