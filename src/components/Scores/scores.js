@@ -1,9 +1,12 @@
-import React from "react";
+import React, { useEffect } from "react";
 
 let Scores = () => {
+  let scores = JSON.parse(sessionStorage.getItem("scores") || []).slice();
   return (
     <div>
-      <div></div>
+      {scores.map((score, index) => (
+        <div key={index}>{console.log(score)}</div>
+      ))}
     </div>
   );
 };

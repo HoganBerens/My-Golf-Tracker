@@ -1,10 +1,29 @@
 import React from "react";
 import "./newScores.css";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 
 let NewScores = () => {
   const [newScores, setNewScores] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
+
+  let handleChange = useCallback(
+    (index, stat, value) => {
+      let newArr = newScores.slice();
+      newArr[index][stat] = value;
+
+      setNewScores(newArr);
+    },
+    [newScores]
+  );
+
+  let submitHandler = (score) => {
+    let scores = (sessionStorage.getItem("scores") || []).slice();
+    sessionStorage.removeItem("scores");
+    scores.push(score);
+    console.log(JSON.stringify(scores));
+    sessionStorage.setItem("scores", JSON.stringify(scores));
+    window.location = "/home";
+  };
 
   useEffect(() => {
     let scoreList = [];
@@ -14,10 +33,6 @@ let NewScores = () => {
     setNewScores(scoreList);
     setIsLoading(false);
   }, []);
-
-  let handleChange = (index, stat, value) => {
-    console.log(index, stat, value);
-  };
 
   if (isLoading) {
     return null;
@@ -45,10 +60,10 @@ let NewScores = () => {
                     this,
                     index,
                     "score",
-                    newScores[index].score || 0 + 1
+                    newScores[index].score + 1
                   )}
                 >
-                  Up
+                  <div className="arrow">U</div>
                 </div>
                 <div
                   onClick={handleChange.bind(
@@ -58,19 +73,29 @@ let NewScores = () => {
                     newScores[index].score - 1
                   )}
                 >
-                  Down
+                  <div className="arrow">D</div>
                 </div>
 
                 <div
                   className="new-score-row-title"
-                  onClick={handleChange.bind(this, index, "fir")}
+                  onClick={handleChange.bind(
+                    this,
+                    index,
+                    "fir",
+                    !newScores[index].fir
+                  )}
                 >
                   {newScores[index].fir ? "Yes" : "No"}
                 </div>
 
                 <div
                   className="new-score-row-title"
-                  onClick={handleChange.bind(this, index, "gir")}
+                  onClick={handleChange.bind(
+                    this,
+                    index,
+                    "gir",
+                    !newScores[index].gir
+                  )}
                 >
                   {newScores[index].gir ? "Yes" : "No"}
                 </div>
@@ -85,7 +110,9 @@ let NewScores = () => {
                     "putts",
                     newScores[index].putts + 1
                   )}
-                ></div>
+                >
+                  <div className="arrow">U</div>
+                </div>
                 <div
                   onClick={handleChange.bind(
                     this,
@@ -93,11 +120,14 @@ let NewScores = () => {
                     "putts",
                     newScores[index].putts - 1
                   )}
-                ></div>
+                >
+                  <div className="arrow">D</div>
+                </div>
               </div>
             )
           )}
         </div>
+        <button onClick={submitHandler.bind(this, newScores)}>Submit</button>
       </div>
     );
   }

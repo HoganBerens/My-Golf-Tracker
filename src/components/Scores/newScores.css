@@ -44,3 +44,11 @@
   margin: 0 20px;
   background-color: rgb(187, 232, 247);
 }
+
+.arrow-parent {
+  display: flex;
+  flex-direction: row;
+}
+
+.arrow {
+}
