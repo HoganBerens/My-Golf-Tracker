@@ -17,8 +17,11 @@ let NewScores = () => {
   );
 
   let submitHandler = (score) => {
-    let scores = (sessionStorage.getItem("scores") || []).slice();
+    let scores = JSON.parse(sessionStorage.getItem("scores") || null);
     sessionStorage.removeItem("scores");
+    if (scores === null) {
+      scores = [];
+    }
     scores.push(score);
     console.log(JSON.stringify(scores));
     sessionStorage.setItem("scores", JSON.stringify(scores));
@@ -42,7 +45,7 @@ let NewScores = () => {
         <h1 className="new-score-header">Enter New Score</h1>
         <div className="new-score-displays">
           {["Hole", "Score", "FIR", "GIR", "Putts"].map((title, index) => (
-            <div key={index} className="new-score-title">
+            <div key={index} className="title">
               {title}
             </div>
           ))}

@@ -1,0 +1,13 @@
+.wrapper {
+  display: flex;
+  flex-direction: row;
+}
+
+.titles {
+  flex-direction: row;
+}
+
+.children {
+  flex: 1 1 auto;
+  margin-left: 30px;
+}
